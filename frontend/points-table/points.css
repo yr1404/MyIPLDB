@@ -1,0 +1,497 @@
+:root {
+    --primary-color: #0078d7;
+    --secondary-color: #2b2b31;
+    --accent-color: #ff9900;
+    --background-color: #f4f4f8;
+    --text-color: #333;
+    --card-bg-color: #fff;
+    --header-bg: linear-gradient(90deg, #0078d7, #00a2ff);
+    --border-color: #e0e0e0;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    
+    --orange-cap-color: #ff8c00;
+    --orange-cap-gradient: linear-gradient(135deg, #ff9900, #e67700);
+    --orange-cap-shadow: 0 4px 10px rgba(255, 140, 0, 0.4);
+    
+    --purple-cap-color: #9c27b0;
+    --purple-cap-gradient: linear-gradient(135deg, #9c27b0, #6a1b9a);
+    --purple-cap-shadow: 0 4px 10px rgba(156, 39, 176, 0.4);
+    
+    --team-color: #4caf50;
+    --team-gradient: linear-gradient(135deg, #4caf50, #2e7d32);
+    --team-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Header styles */
+header {
+    background: var(--header-bg);
+    color: white;
+    padding: 1rem 2rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.logo img {
+    height: 50px;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 1rem;
+    justify-content: center;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+nav ul li a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+}
+
+
+/* Main content styles */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Top performers section */
+.top-performers {
+    margin-bottom: 2rem;
+}
+
+.top-performers h2 {
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+}
+
+.top-performers h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent-color);
+    border-radius: 2px;
+}
+
+.performers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.performer-card {
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    min-height: 250px;
+}
+
+.performer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.cap-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 0.5rem;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+.cap-icon i {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+}
+
+.orange-cap .cap-icon {
+    color: var(--orange-cap-color);
+}
+
+.purple-cap .cap-icon {
+    color: var(--purple-cap-color);
+}
+
+.team-card .cap-icon {
+    color: var(--team-color);
+}
+
+/* Player Profile in Top Performer Card */
+.player-profile {
+    display: flex;
+    height: 100%;
+}
+
+.player-image-container {
+    flex: 1;
+    overflow: hidden;
+    background-color: #eee;
+    position: relative;
+}
+
+.player-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.player-info {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.player-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.player-team {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.player-stats {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.orange-cap .stat-value {
+    color: var(--orange-cap-color);
+}
+
+.purple-cap .stat-value {
+    color: var(--purple-cap-color);
+}
+
+.team-card .stat-value {
+    color: var(--team-color);
+}
+
+.stat-label {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+    opacity: 0.7;
+}
+
+/* Team Card Specific Styles */
+.team-profile {
+    display: flex;
+    height: 100%;
+}
+
+.team-logo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background-color: #f9f9f9;
+}
+
+.team-logo img {
+    max-width: 100%;
+    max-height: 150px;
+}
+
+.team-info {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.team-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.team-stats {
+    margin-top: 1rem;
+}
+
+.team-record {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.team-trophies {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.trophy-years {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-top: 0.5rem;
+}
+
+.trophy-year {
+    background-color: var(--team-color);
+    color: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Tabs and Tables */
+.leaderboards {
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.tabs {
+    display: flex;
+    border-bottom: 2px solid var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.tab-button:hover {
+    color: var(--primary-color);
+}
+
+.tab-button.active {
+    color: var(--primary-color);
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.tab-pane h3 {
+    margin-bottom: 1rem;
+    color: #444;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+thead {
+    background-color: #f4f4f8;
+}
+
+th, td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    font-weight: 600;
+    color: #555;
+}
+
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.loading {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+}
+
+/* Trophy icons */
+.trophy-list {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.trophy {
+    color: var(--accent-color);
+    font-size: 1rem;
+}
+
+/* Rank styling */
+.rank-1, .rank-2, .rank-3 {
+    font-weight: bold;
+}
+
+.rank-1 {
+    color: gold;
+}
+
+.rank-2 {
+    color: silver;
+}
+
+.rank-3 {
+    color: #cd7f32; /* bronze */
+}
+
+.team-name-with-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.team-logo-small {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+/* Loading spinner */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+    color: #666;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        /* align-items: flex-start; */
+    }
+
+    .logo {
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    nav ul li {
+        margin-right: 0;
+    }
+    .performers-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .player-profile, .team-profile {
+        flex-direction: column;
+    }
+    
+    .player-image-container, .team-logo {
+        height: 200px;
+    }
+    
+    .tabs {
+        overflow-x: auto;
+    }
+}

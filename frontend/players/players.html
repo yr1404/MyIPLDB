@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Players Database</title>
+    <link rel="stylesheet" href="players.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://www.iplt20.com/assets/images/ipl-logo-new-old.png" alt="IPL Logo">
+            <h2>IPL Players</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../home/home.html">Home</a></li>
+                <li><a href="#" class="active">Players</a></li>
+                <li><a href="../teams/teams.html">Teams</a></li>
+                <li><a href="../points-table/points.html">Points Table</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="filters">
+            <h2>Filters</h2>
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label for="team-filter">Team:</label>
+                    <select id="team-filter">
+                        <option value="">All Teams</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="role-filter">Role:</label>
+                    <select id="role-filter">
+                        <option value="">All Roles</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="sort-by">Sort By:</label>
+                    <select id="sort-by">
+                        <option value="name">Name</option>
+                        <option value="runs">Runs (High to Low)</option>
+                        <option value="wickets">Wickets (High to Low)</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>&nbsp;</label>
+                    <div class="button-group">
+                        <button id="apply-filters" class="primary-button">Apply Filters</button>
+                        <button id="reset-filters" class="secondary-button">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="players-container">
+            <div class="players-header">
+                <h2>IPL Players</h2>
+                <button id="add-player-btn" class="primary-button">
+                    <i class="fas fa-plus"></i> Add Player
+                </button>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search player by name...">
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            
+            <div class="players-grid" id="players-grid">
+                <!-- Players will be displayed here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>MyIPLDB</p>
+    </footer>
+
+    <!-- Add/Edit Player Modal -->
+    <div id="player-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Add New Player</h2>
+            <form id="player-form">
+                <input type="hidden" id="player-id">
+                
+                <div class="form-group">
+                    <label for="player-name">Name:</label>
+                    <input type="text" id="player-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="player-role">Role:</label>
+                    <select id="player-role" required>
+                        <option value="">Select Role</option>
+                        <option value="Batsman">Batsman</option>
+                        <option value="Bowler">Bowler</option>
+                        <option value="All-Rounder">All-Rounder</option>
+                        <option value="Wicket-Keeper Batsman">Wicket-Keeper Batsman</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="player-team">Team:</label>
+                    <select id="player-team">
+                        <option value="">No Team</option>
+                        <!-- Teams will be populated here -->
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="player-runs">Runs:</label>
+                        <input type="number" id="player-runs" min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="player-wickets">Wickets:</label>
+                        <input type="number" id="player-wickets" min="0" value="0">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="player-image">Image URL:</label>
+                    <input type="url" id="player-image" placeholder="https://example.com/player-image.png">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="primary-button">Save Player</button>
+                    <button type="button" id="cancel-btn" class="secondary-button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="players.js"></script>
+</body>
+</html>

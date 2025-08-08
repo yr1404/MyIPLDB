@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Teams</title>
+    <link rel="stylesheet" href="teams.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://www.iplt20.com/assets/images/ipl-logo-new-old.png" alt="IPL Logo">
+            <h2>IPL Teams</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../home/home.html">Home</a></li>
+                <li><a href="../players/players.html">Players</a></li>
+                <li><a href="#" class="active">Teams</a></li>
+                <li><a href="../points-table/points.html">Points Table</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- 3D Team Logo Carousel -->
+        <section class="carousel-container">
+            <div class="slider">
+                <span style="--i:1;"><img src="images/csk.png" data-team="Chennai Super Kings"></span>
+                <span style="--i:2;"><img src="images/mi.png" data-team="Mumbai Indians"></span>
+                <span style="--i:3;"><img src="images/rcb.png" data-team="Royal Challengers Bangalore"></span>
+                <span style="--i:4;"><img src="images/kkr.png" data-team="Kolkata Knight Riders"></span>
+                <span style="--i:5;"><img src="images/srh.png" data-team="Sunrisers Hyderabad"></span>
+                <span style="--i:6;"><img src="images/rr.png" data-team="Rajasthan Royals"></span>
+                <span style="--i:7;"><img src="images/pbks.png" data-team="Punjab Kings"></span>
+                <span style="--i:8;"><img src="images/gt.png" data-team="Gujarat Titans"></span>
+                <span style="--i:9;"><img src="images/lsg.png" data-team="Lucknow Super Giants"></span>
+                <span style="--i:10;"><img src="images/delhi.png" data-team="Delhi Capitals"></span>
+            </div>
+        </section>
+        
+        <!-- Teams Grid -->
+        <section class="teams-section">
+            <h2>IPL Teams</h2>
+            <div class="teams-grid" id="teams-grid">
+                <!-- Teams will be displayed here -->
+                <div class="loading">Loading teams...</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Team Edit Modal -->
+    <div id="team-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modal-title">Edit Team</h2>
+            <form id="team-form">
+                <input type="hidden" id="team-id">
+                
+                <div class="form-group">
+                    <label for="team-name">Team Name:</label>
+                    <input type="text" id="team-name" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="team-wins">Wins:</label>
+                        <input type="number" id="team-wins" min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="team-losses">Losses:</label>
+                        <input type="number" id="team-losses" min="0" value="0">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="team-trophies">Trophy Years:</label>
+                    <textarea id="team-trophies" placeholder="e.g. 2013, 2015, 2017"></textarea>
+                    <span class="help-text">Enter years separated by commas</span>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="primary-button">Save Changes</button>
+                    <button type="button" id="cancel-btn" class="secondary-button">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>MyIPLDB</p>
+    </footer>
+
+    <script src="teams.js"></script>
+</body>
+</html>

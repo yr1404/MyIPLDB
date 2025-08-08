@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyIPLDB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #1a1a1a;
+            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .splash-container {
+            text-align: center;
+            width: 100%;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #b8b8b8;
+            margin-bottom: 40px;
+            font-weight: 300;
+            z-index: 2;
+        }
+
+        .splash-image {
+            width: 100vw;
+            height: auto;
+            object-fit: cover;
+            filter: brightness(0.85) contrast(0.95) saturate(0.9);
+            opacity: 0.8;
+            max-height: 60vh;
+            object-position: center;
+            image-rendering: -webkit-optimize-contrast;
+            /* Improves image sharpness in Chrome */
+            image-rendering: crisp-edges;
+            /* For Firefox */
+            transition: all 0.5s ease;
+        }
+
+        .loading-bar-container {
+            width: 80%;
+            max-width: 500px;
+            height: 6px;
+            background-color: #333;
+            border-radius: 3px;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            z-index: 2;
+            position: relative;
+        }
+
+        .loading-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #4d84e2, #19b5fe);
+            border-radius: 3px;
+            animation: loadingAnimation 3s ease forwards 0.5s;
+        }
+
+        .loading-text {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            z-index: 2;
+            position: relative;
+        }
+
+        @keyframes loadingAnimation {
+            0% {
+                width: 0%;
+            }
+
+            50% {
+                width: 70%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="splash-container">
+        <h1 class="logo">MyIPLDB</h1>
+        <!-- <p class="tagline">...</p> -->
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+        <p class="loading-text">DOUBLE CLICK TROPHY ON THE NEXT PAGE TO CONTINUE</p>
+        <img src="./frontend/assets/players-loading.png" alt="IPL Players" class="splash-image">
+    </div>
+
+    <script>
+        // Redirect to main page after loading completes
+        setTimeout(() => {
+            window.location.href = '/frontend/home/home.html'; // Change this to your target page
+        }, 4000); // Adjust timing to match your loading animation
+    </script>
+</body>
+
+</html>

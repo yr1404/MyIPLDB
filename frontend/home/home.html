@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyIPLDB</title>
+    
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.module.js",
+        "three/examples/jsm/controls/OrbitControls": "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/controls/OrbitControls.js",
+        "three/examples/jsm/loaders/FBXLoader": "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/loaders/FBXLoader.js",
+        "three/examples/jsm/loaders/TGALoader": "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/loaders/TGALoader.js",
+        "three/examples/jsm/environments/RoomEnvironment": "https://cdn.jsdelivr.net/npm/three@0.157.0/examples/jsm/environments/RoomEnvironment.js"
+      }
+    }
+    </script>
+    <script type="module" src="model.js"></script>
+    <script src="splash.js"></script>
+    
+    <link rel="stylesheet" href="./home.css">
+</head>
+
+<body>
+  
+  <div class="splash">
+    <img src="../assets/ipl.png" class="fade-in" alt="IPL" width="200px">
+  </div>
+
+  <div class="parent">
+    <div id="model-container"></div>
+    <div id="menu">
+      <ul>
+        <li><a href="../teams/teams.html">Teams</a></li>
+        <li><a href="../players/players.html">Players</a></li>
+        <li><a href="../points-table/points.html">Points Table</a></li>
+        <li><a href="../query/query.html">SQL Playground</a></li>
+      </ul>
+    </div>
+  </div>
+    
+</body>
+
+</html>

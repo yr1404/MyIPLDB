@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SQL Query Runner</title>
+
+  <style>
+    :root {
+      --primary-color: #007bff;
+      --secondary-color: #0056b3;
+      --text-color: wheat;
+      --bg-color: black;
+      --card-bg: hsl(222, 45%, 7%);
+      --border-color: #333;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+    }
+
+    h2 {
+      color: var(--text-color);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .query-container {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    pre {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--text-color);
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 1rem;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: perspective(5000px) rotateY(var(--rotateX)) rotateX(var(--rotateY));
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 100px;
+      white-space: pre-wrap;
+      /* Add this line to enable wrapping */
+      word-wrap: break-word;
+      /* Ensure long words also wrap */
+      overflow-wrap: break-word;
+    }
+
+    pre::before,
+    pre::after {
+      content: "";
+      position: absolute;
+      border-radius: inherit;
+    }
+
+    /* shadow */
+    pre::before {
+      inset: 0.75rem;
+      border-radius: inherit;
+      background: black;
+      z-index: -1;
+      transform: translateZ(-50px);
+      filter: blur(15px);
+      opacity: 0.5;
+    }
+
+    /* gradient thingy */
+    pre::after {
+      z-index: -2;
+      inset: -1rem;
+      background: linear-gradient(-45deg, #e3242b, #1a237e);
+      transform: translateZ(-50px);
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s;
+      margin: 20px 0;
+    }
+
+    button:hover {
+      background-color: var(--secondary-color);
+    }
+
+    #results {
+      width: 100%;
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+
+    table {
+      color: var(--text-color);
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border-color);
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #333;
+      color: var(--text-color);
+    }
+
+    /* Schema Panel Styles */
+    .info-panel {
+      display: flex;
+      width: 100%;
+      margin: 20px 0;
+      gap: 20px;
+    }
+
+    .schema-container {
+      flex: 1;
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .schema-container h3 {
+      margin-top: 0;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 5px;
+    }
+
+    .table-schema {
+      margin-bottom: 15px;
+    }
+
+    .table-name {
+      color: var(--primary-color);
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+
+    .column-list {
+      margin-left: 15px;
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .column-item {
+      padding: 3px 0;
+      display: flex;
+    }
+
+    .column-name {
+      color: #ffcc00;
+      margin-right: 8px;
+    }
+
+    .column-type {
+      color: #aaa;
+      font-style: italic;
+    }
+
+    /* Example Queries Slider */
+    .examples-slider {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .examples-slider h3 {
+      margin-top: 0;
+    }
+
+    .examples-track {
+      display: flex;
+      animation: scroll 50s linear infinite;
+      width: max-content;
+      gap: 20px;
+    }
+
+    .example-query {
+      background: #1e2a38;
+      border-radius: 8px;
+      padding: 10px 15px;
+      min-width: 250px;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s;
+      border-left: 3px solid var(--primary-color);
+    }
+
+    .example-query:hover {
+      background: #2c3e50;
+      transform: translateY(-3px);
+    }
+
+    .example-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #ffcc00;
+    }
+
+    .example-code {
+      font-family: monospace;
+      color: #ddd;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 0.85rem;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(calc(-100% + 500px));
+      }
+    }
+
+    /* Pause animation on hover */
+    .examples-slider:hover .examples-track {
+      animation-play-state: paused;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .info-panel {
+        flex-direction: column;
+      }
+    }
+  </style>
+  <script src="./styles.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h2>SQL Query Runner</h2>
+
+    <div class="query-container">
+      <pre id="queryBox" contenteditable="true" class="language-sql" tabindex="0">SELECT * FROM players;</pre>
+      <button onclick="runQuery()">Run Query</button>
+    </div>
+
+    <!-- Example Queries Slider -->
+    <div class="examples-slider">
+      <h3>Example Queries</h3>
+      <div class="examples-track" id="examples-track">
+        <!-- Will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <!-- Database Schema Display -->
+    <div class="info-panel">
+      <div class="schema-container">
+        <h3>Database Schema</h3>
+        <div id="schema-content">
+          <div class="loading">Loading schema...</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="results"></div>
+  </div>
+
+  <script>
+    // Fetch schema information when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchSchema();
+      populateExampleQueries();
+    });
+
+    // Example queries
+    const exampleQueries = [
+      {
+        title: "Get All Players",
+        query: "SELECT * FROM players;"
+      },
+      {
+        title: "Top 5 Run Scorers",
+        query: "SELECT name, team_id, runs FROM players ORDER BY runs DESC LIMIT 5;"
+      },
+      {
+        title: "Top Wicket Takers",
+        query: "SELECT name, team_id, wickets FROM players ORDER BY wickets DESC LIMIT 5;"
+      },
+      {
+        title: "Players by Team",
+        query: "SELECT p.name, p.role, t.name as team FROM players p JOIN teams t ON p.team_id = t.id WHERE t.name = 'Chennai Super Kings';"
+      },
+      {
+        title: "Teams with Most Wins",
+        query: "SELECT name, wins FROM teams ORDER BY wins DESC;"
+      },
+      {
+        title: "Teams with Trophies",
+        query: "SELECT name, trophies FROM teams WHERE trophies IS NOT NULL;"
+      },
+      {
+        title: "All-Rounders",
+        query: "SELECT name, runs, wickets FROM players WHERE role LIKE '%all-rounder%' ORDER BY (runs + wickets) DESC;"
+      },
+      {
+        title: "Players with No Team",
+        query: "SELECT name, role FROM players WHERE team_id IS NULL;"
+      }
+    ];
+
+    function populateExampleQueries() {
+      const track = document.getElementById('examples-track');
+
+      exampleQueries.forEach(example => {
+        const div = document.createElement('div');
+        div.className = 'example-query';
+        div.innerHTML = `
+          <div class="example-title">${example.title}</div>
+          <div class="example-code">${example.query}</div>
+        `;
+        div.addEventListener('click', () => {
+          document.getElementById('queryBox').innerText = example.query;
+        });
+        track.appendChild(div);
+      });
+
+      // Clone examples for continuous scrolling effect
+      exampleQueries.forEach(example => {
+        const div = document.createElement('div');
+        div.className = 'example-query';
+        div.innerHTML = `
+          <div class="example-title">${example.title}</div>
+          <div class="example-code">${example.query}</div>
+        `;
+        div.addEventListener('click', () => {
+          document.getElementById('queryBox').innerText = example.query;
+        });
+        track.appendChild(div);
+      });
+    }
+
+    async function fetchSchema() {
+      try {
+        const response = await fetch('http://localhost:3000/schema');
+        const data = await response.json();
+
+        if (data.error) {
+          document.getElementById('schema-content').innerHTML = `<div class="error">${data.error}</div>`;
+          return;
+        }
+
+        displaySchema(data.data);
+      } catch (error) {
+        console.error('Error fetching schema:', error);
+        document.getElementById('schema-content').innerHTML = '<div class="error">Failed to load schema</div>';
+      }
+    }
+
+    function displaySchema(schema) {
+      const schemaContent = document.getElementById('schema-content');
+      schemaContent.innerHTML = '';
+
+      Object.keys(schema).forEach(tableName => {
+        const tableDiv = document.createElement('div');
+        tableDiv.className = 'table-schema';
+
+        const tableNameDiv = document.createElement('div');
+        tableNameDiv.className = 'table-name';
+        tableNameDiv.innerHTML = `<i class="fas fa-table"></i> ${tableName}`;
+
+        const columnList = document.createElement('ul');
+        columnList.className = 'column-list';
+
+        schema[tableName].forEach(column => {
+          const columnItem = document.createElement('li');
+          columnItem.className = 'column-item';
+          columnItem.innerHTML = `
+            <span class="column-name">${column.name}</span>
+            <span class="column-type">${column.type}</span>
+            ${column.pk ? ' <span class="column-pk">🔑</span>' : ''}
+          `;
+          columnList.appendChild(columnItem);
+        });
+
+        tableDiv.appendChild(tableNameDiv);
+        tableDiv.appendChild(columnList);
+        schemaContent.appendChild(tableDiv);
+      });
+    }
+
+    async function runQuery() {
+      const query = document.getElementById('queryBox').innerText;
+      try {
+        const res = await fetch('http://localhost:3000/query', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ query })
+        });
+        const data = await res.json();
+
+        if (data.error) {
+          document.getElementById('results').innerHTML = `<div class="error">${data.error}</div>`;
+          return;
+        }
+
+        const rows = data.data;
+        if (rows.length === 0) {
+          document.getElementById('results').innerHTML = '<p>No results.</p>';
+          return;
+        }
+
+        const table = '<table><thead><tr>' +
+          Object.keys(rows[0]).map(col => '<th>' + col + '</th>').join('') +
+          '</tr></thead><tbody>' +
+          rows.map(row => '<tr>' +
+            Object.values(row).map(val => '<td>' + (val !== null ? val : 'NULL') + '</td>').join('') +
+            '</tr>').join('') +
+          '</tbody></table>';
+
+        document.getElementById('results').innerHTML = table;
+      } catch (error) {
+        console.error('Error running query:', error);
+        document.getElementById('results').innerHTML = '<div class="error">Failed to execute query</div>';
+      }
+    }
+  </script>
+</body>
+
+</html>

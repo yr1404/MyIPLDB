@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Points Table</title>
+    <link rel="stylesheet" href="points.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://www.iplt20.com/assets/images/ipl-logo-new-old.png" alt="IPL Logo">
+            <h2>IPL Points Table</h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../home/home.html">Home</a></li>
+                <li><a href="../players/players.html">Players</a></li>
+                <li><a href="../teams/teams.html">Teams</a></li>
+                <li><a href="#" class="active">Points Table</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="top-performers">
+            <h2>Top Performers</h2>
+            <div class="performers-grid">
+                <!-- Orange Cap Card -->
+                <div class="performer-card orange-cap">
+                    <div class="cap-icon">
+                        <i class="fas fa-hat-cowboy"></i>
+                        <span>Orange Cap</span>
+                    </div>
+                    <div id="top-batsman-card">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+                
+                <!-- Top Team Card -->
+                <div class="performer-card team-card">
+                    <div class="cap-icon">
+                        <i class="fas fa-trophy"></i>
+                        <span>Top Team</span>
+                    </div>
+                    <div id="top-team-card">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+                
+                <!-- Purple Cap Card -->
+                <div class="performer-card purple-cap">
+                    <div class="cap-icon">
+                        <i class="fas fa-hat-wizard"></i>
+                        <span>Purple Cap</span>
+                    </div>
+                    <div id="top-bowler-card">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="leaderboards">
+            <div class="tabs">
+                <button class="tab-button active" data-tab="team-rankings">Team Rankings</button>
+                <button class="tab-button" data-tab="batsmen-rankings">Most Runs</button>
+                <button class="tab-button" data-tab="bowlers-rankings">Most Wickets</button>
+            </div>
+            
+            <div class="tab-content">
+                <!-- Team Rankings Table -->
+                <div class="tab-pane active" id="team-rankings">
+                    <h3>Team Rankings</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Team</th>
+                                    <th>M</th>
+                                    <th>W</th>
+                                    <th>L</th>
+                                    <th>Pts</th>
+                                    <th>Win %</th>
+                                    <th>Trophies</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teams-table-body">
+                                <tr>
+                                    <td colspan="8" class="loading">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Batsmen Rankings Table -->
+                <div class="tab-pane" id="batsmen-rankings">
+                    <h3>Top Batsmen (Orange Cap)</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Player</th>
+                                    <th>Team</th>
+                                    <th>Role</th>
+                                    <th>Runs</th>
+                                </tr>
+                            </thead>
+                            <tbody id="batsmen-table-body">
+                                <tr>
+                                    <td colspan="5" class="loading">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <!-- Bowlers Rankings Table -->
+                <div class="tab-pane" id="bowlers-rankings">
+                    <h3>Top Bowlers (Purple Cap)</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Player</th>
+                                    <th>Team</th>
+                                    <th>Role</th>
+                                    <th>Wickets</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bowlers-table-body">
+                                <tr>
+                                    <td colspan="5" class="loading">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>MyIPLDB</p>
+    </footer>
+
+    <script src="points.js"></script>
+</body>
+</html>
