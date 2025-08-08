@@ -1,7 +1,7 @@
 
 # MyIPLDB
 
-A simple full-stack web app to run SQL queries in browser against an in-memory SQLite DB.
+MyIPLDB is your personal IPL database — add and manage players, teams and points table, explore the stats through an intuitive interface.
 
 ## Setup
 
