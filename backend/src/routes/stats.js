@@ -8,6 +8,5 @@ router.get('/bowlers', statsController.getBowlers);
 router.get('/teams', statsController.getTeams);
 router.get('/dashboard', statsController.getDashboard);
 router.get('/roles', statsController.getRoles);
-router.get('/schema', statsController.getSchema);
 
 module.exports = router;

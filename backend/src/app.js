@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/players', playerRoutes);
 app.use('/teams', teamRoutes);
 app.use('/stats', statsRoutes);
-// app.use('/query', queryRoutes);
+app.use('/query', queryRoutes);
 
 // Health check
 app.get('/health', (req, res) => {

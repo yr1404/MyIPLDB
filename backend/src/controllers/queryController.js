@@ -106,6 +106,42 @@ const queryController = {
     } catch (error) {
       next(error);
     }
+  },
+
+  async getSchema(req, res, next) {
+    try {
+      const schema = {};
+      
+      db.all(`SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'`, [], (err, tables) => {
+        if (err) return next(err);
+        
+        let tablesProcessed = 0;
+        
+        if (tables.length === 0) {
+          return res.json({ success: true, data: {} });
+        }
+        
+        tables.forEach(table => {
+          db.all(`PRAGMA table_info(${table.name})`, [], (err, columns) => {
+            if (err) return next(err);
+            
+            schema[table.name] = columns.map(col => ({
+              name: col.name,
+              type: col.type,
+              pk: col.pk === 1
+            }));
+            
+            tablesProcessed++;
+            
+            if (tablesProcessed === tables.length) {
+              res.json({ success: true, data: schema });
+            }
+          });
+        });
+      });
+    } catch (error) {
+      next(error);
+    }
   }
 };
 
