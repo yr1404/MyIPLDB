@@ -15,6 +15,20 @@ npm install
 node server.js
 ```
 
-2. Open `index.html` in your browser.
+2. Run a local development server for the frontend:
+
+VS Code: Install the Live Server extension → Right-click index.html → Open with Live Server
+
+Python:
+
+```
+python3 -m http.server
+```
+PHP:
+```
+php -S localhost:8000
+```
+
+Open the provided URL in your browser and start using the app.
 
 Enjoy!
